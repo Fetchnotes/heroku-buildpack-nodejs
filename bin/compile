@@ -148,6 +148,9 @@ if [ ! -e "$HOME/vendor/$gm_name" ]; then
   cd ..
   mv $gm_name $build_dir/vendor/$gm_name
   
+  # Remove old artifact
+  rm "$gm_name.tar.gz"
+  
 else
   status "GraphicsMagick already present"
 fi
