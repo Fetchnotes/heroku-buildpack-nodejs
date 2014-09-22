@@ -6,7 +6,7 @@ set -o pipefail   # don't ignore exit codes when piping output
 
 status "Installing graphics"
 sudo apt-get update || true
-sudo apt-get install imagemagick graphicsmagick
+sudo apt-get install imagemagick
 
 # Configure directories
 build_dir=$1
