@@ -134,7 +134,7 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
 
 gm_name="GraphicsMagick-1.3.20"
 
-if [ ! -e "$HOME/vendor/$gm_name" ]; then
+if [ ! -e "$build_dir/$gm_name" ]; then
 
   status "Installing graphics"
   sudo apt-get update 2>&1 >/dev/null || true
@@ -146,7 +146,7 @@ if [ ! -e "$HOME/vendor/$gm_name" ]; then
   make
   
   cd ..
-  mv $gm_name $build_dir/vendor/$gm_name
+  mv $gm_name $build_dir/$gm_name
   
   # Remove old artifact
   rm "$gm_name.tar.gz"
@@ -155,6 +155,6 @@ else
   status "GraphicsMagick already present"
 fi
 
-status "export PATH=\"\$HOME/vendor/$gm_name/utilities:\$PATH\";"
+status "export PATH=\"$build_dir/$gm_name/utilities:\$PATH\";"
 
-echo "export PATH=\"\$HOME/vendor/$gm_name/utilities:\$PATH\";" > $build_dir/.profile.d/gm.sh
+echo "export PATH=\"$build_dir/$gm_name/utilities:\$PATH\";" > $build_dir/.profile.d/gm.sh
