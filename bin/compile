@@ -152,6 +152,6 @@ else
   status "GraphicsMagick already present"
 fi
 
-status "export PATH=\"\$HOME/vendor/$gm_name/utilities\";"
+status "export PATH=\"\$HOME/vendor/$gm_name/utilities:\$PATH\";"
 
-echo "export PATH=\"\$HOME/vendor/$gm_name/utilities\";" > $build_dir/.profile.d/gm.sh
+echo "export PATH=\"\$HOME/vendor/$gm_name/utilities:\$PATH\";" > $build_dir/.profile.d/gm.sh
