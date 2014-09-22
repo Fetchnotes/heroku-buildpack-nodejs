@@ -4,10 +4,6 @@ set -e            # fail fast
 set -o pipefail   # don't ignore exit codes when piping output
 # set -x          # enable debugging
 
-status "Installing graphics"
-sudo apt-get update || true
-sudo apt-get install imagemagick
-
 # Configure directories
 build_dir=$1
 cache_dir=$2
@@ -136,3 +132,13 @@ status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
+status "Installing graphics"
+sudo apt-get update 2>&1 >/dev/null || true
+
+$gm_name="GraphicsMagick-1.3.20"
+curl -O "ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/1.3/$gm_name.tar.gz"
+gzip -d "$gm_name.tar.gz" | tar xzf -
+cd $gm_name
+./configure --prefix=/usr/local
+make
+sudo make install
