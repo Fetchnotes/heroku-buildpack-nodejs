@@ -138,15 +138,16 @@ if [ ! -e "$build_dir/$gm_name" ]; then
 
   status "Installing graphics"
   sudo apt-get update 2>&1 >/dev/null || true
-
+  
+  cd $build_dir
+  # Fetch and build
   wget --no-verbose "http://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.20/$gm_name.tar.gz"
   tar xzf "$gm_name.tar.gz"
   cd $gm_name
   ./configure --prefix=/usr/local
   make
-  
+  # Leave our build tree
   cd ..
-  mv $gm_name $build_dir/$gm_name
   
   # Remove old artifact
   rm "$gm_name.tar.gz"
