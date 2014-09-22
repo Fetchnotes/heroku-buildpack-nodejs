@@ -136,7 +136,7 @@ gm_name="GraphicsMagick-1.3.20"
 
 if [ ! -e "$cache_dir/$gm_name" ]; then
 
-  status "Installing graphics"
+  status "Building graphics"
   sudo apt-get update 2>&1 >/dev/null || true
   
   cd $build_dir
@@ -154,10 +154,12 @@ if [ ! -e "$cache_dir/$gm_name" ]; then
   # Remove old artifact
   rm "$gm_name.tar.gz"
   
-else
-  status "GraphicsMagick already present"
 fi
 
-status "export PATH=\"$cache_dir/$gm_name/utilities:\$PATH\";"
 
-echo "export PATH=\"$cache_dir/$gm_name/utilities:\$PATH\";" > $build_dir/.profile.d/gm.sh
+status "Installing GraphicsMagick"
+cd "$cache_dir/$gm_name"
+sudo make install
+cd $build_dir
+
+echo "$(which gm)"
